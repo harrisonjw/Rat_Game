@@ -25,16 +25,12 @@ class CombatEncounter(Encounter):
 
 
 
-
-
-
 # Character Creation
 
 name = input("what is your name?")
 creation_points = 20
 
 print(f"you have {str(creation_points)} points left")
-
 bulk = int(input("how bulky are you?"))
 creation_points -= bulk
 
