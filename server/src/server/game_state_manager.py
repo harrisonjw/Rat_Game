@@ -16,13 +16,13 @@ class GameAction:
 def get_game_state():
     return game_state
 
-def process_game_action(game_action):
+def process_game_action():
     # applies the game action to the global game state
     global game_state
     game_state.move_count += 1
 
 
-
+ 
 
 
 

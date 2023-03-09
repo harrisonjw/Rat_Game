@@ -1,31 +1,40 @@
-from flask import Flask
-from game_state_manager import get_game_state, process_game_action
+from flask import Flask, render_template
+from game_state_manager import get_game_state, process_game_action, game_state
+
 
 app = Flask(__name__)
 
-# Setting up a basic route
+# Basic home route
 @app.route("/")
-def hello_world():
-    return "<p>Hello World!</p>"
+def welcome():
+    return "Welcome to Rat Game!"
 
-@app.route("/gameState", methods = ["GET"])
+
+# gameState route displays the move count
+@app.route("/gameState", methods = ["POST", "GET"])
 def render_game_state():
     #return get_game_state()
-    return "renders the game state here"
+    return f"moves = {game_state.move_count}"
 
-@app.route("/newGame", methods = ["POST"])
+
+# newGame route resets move count to zero
+@app.route("/newGame", methods = ["POST", "GET"])
 def new_game():
+    game_state.move_count = 0
     return "starting a new game"
 
-@app.route("/action", methods = ["POST"])
+
+# action route adds +1 to the move count
+@app.route("/action", methods = ["POST", "GET"])
 def process_action():
-    #return process_game_action()
+    process_game_action()
     return "processing..."
 
 
 # Runs the app
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=80)
+   
 
 
 
